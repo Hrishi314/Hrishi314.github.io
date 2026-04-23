@@ -85,19 +85,40 @@ window.addEventListener('scroll', () => {
   else navbar.classList.remove('scrolled');
 });
 
+
 // ── HAMBURGER MENU ─────────────────────────
 const hamburger = document.getElementById('hamburger');
 const navLinks = document.querySelector('.nav-links');
+let menuOpen = false;
+
 hamburger.addEventListener('click', () => {
-  navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-  navLinks.style.flexDirection = 'column';
-  navLinks.style.position = 'absolute';
-  navLinks.style.top = '100%';
-  navLinks.style.left = '0';
-  navLinks.style.right = '0';
-  navLinks.style.background = 'rgba(5,5,8,0.98)';
-  navLinks.style.padding = '1rem 1.5rem';
-  navLinks.style.borderBottom = '1px solid rgba(0,245,255,0.2)';
+  menuOpen = !menuOpen;
+  hamburger.classList.toggle('active', menuOpen);
+
+  if (menuOpen) {
+    navLinks.style.display = 'flex';
+    navLinks.style.flexDirection = 'column';
+    navLinks.style.position = 'absolute';
+    navLinks.style.top = '100%';
+    navLinks.style.left = '0';
+    navLinks.style.right = '0';
+    navLinks.style.background = 'rgba(5,5,8,0.98)';
+    navLinks.style.padding = '1rem 1.5rem';
+    navLinks.style.borderBottom = '1px solid rgba(0,245,255,0.2)';
+    navLinks.style.gap = '0.5rem';
+    navLinks.style.zIndex = '999';
+  } else {
+    navLinks.style.display = '';
+  }
+});
+
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+  if (menuOpen && !navbar.contains(e.target)) {
+    menuOpen = false;
+    hamburger.classList.remove('active');
+    navLinks.style.display = '';
+  }
 });
 
 
@@ -178,6 +199,159 @@ document.querySelectorAll('.product-card').forEach(card => {
 });
 
 
+// ── PRODUCT CARD BUTTONS ──────────────────
+document.querySelectorAll('.btn-card').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    const card = btn.closest('.product-card');
+    const productName = card.querySelector('.card-name').textContent;
+
+    // Ripple effect
+    const ripple = document.createElement('span');
+    const rect = btn.getBoundingClientRect();
+    ripple.style.cssText = `
+      position: absolute;
+      border-radius: 50%;
+      width: 10px; height: 10px;
+      background: rgba(0,245,255,0.6);
+      transform: scale(0);
+      left: ${e.clientX - rect.left - 5}px;
+      top: ${e.clientY - rect.top - 5}px;
+      animation: rippleOut 0.5s ease forwards;
+      pointer-events: none;
+    `;
+    btn.style.position = 'relative';
+    btn.style.overflow = 'hidden';
+    btn.appendChild(ripple);
+
+    // Inject animation if not already present
+    if (!document.getElementById('rippleStyle')) {
+      const style = document.createElement('style');
+      style.id = 'rippleStyle';
+      style.textContent = `@keyframes rippleOut {
+        to { transform: scale(20); opacity: 0; }
+      }`;
+      document.head.appendChild(style);
+    }
+
+    setTimeout(() => ripple.remove(), 600);
+
+    // Notify user (replace with real cart/routing logic)
+    showToast(`${productName} — SYSTEM INITIALIZING...`);
+  });
+});
+
+
+// ── TOAST NOTIFICATION ────────────────────
+function showToast(message) {
+  // Remove existing toast if any
+  const existing = document.getElementById('cyberToast');
+  if (existing) existing.remove();
+
+  const toast = document.createElement('div');
+  toast.id = 'cyberToast';
+  toast.textContent = message;
+  toast.style.cssText = `
+    position: fixed;
+    bottom: 2rem; right: 2rem;
+    background: rgba(5,5,8,0.95);
+    border: 1px solid rgba(0,245,255,0.5);
+    color: #00f5ff;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    padding: 0.85rem 1.5rem;
+    z-index: 9999;
+    box-shadow: 0 0 20px rgba(0,245,255,0.2), inset 0 0 10px rgba(0,245,255,0.05);
+    transform: translateX(120%);
+    transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+    max-width: 320px;
+  `;
+
+  // Top accent line
+  const accent = document.createElement('div');
+  accent.style.cssText = `
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, #00f5ff, transparent);
+  `;
+  toast.prepend(accent);
+  document.body.appendChild(toast);
+
+  requestAnimationFrame(() => {
+    toast.style.transform = 'translateX(0)';
+  });
+
+  setTimeout(() => {
+    toast.style.transform = 'translateX(120%)';
+    setTimeout(() => toast.remove(), 400);
+  }, 3000);
+}
+
+
+// ── CTA EMAIL FORM ────────────────────────
+const cyberInput = document.querySelector('.cyber-input');
+const initBtn = document.querySelector('.cta-form .btn-primary-cyber');
+
+if (initBtn && cyberInput) {
+  initBtn.addEventListener('click', () => {
+    const email = cyberInput.value.trim();
+
+    if (!email) {
+      cyberInput.style.borderColor = 'rgba(255,0,144,0.8)';
+      cyberInput.style.boxShadow = '0 0 15px rgba(255,0,144,0.3)';
+      cyberInput.placeholder = 'NEURAL ADDRESS REQUIRED';
+      setTimeout(() => {
+        cyberInput.style.borderColor = '';
+        cyberInput.style.boxShadow = '';
+        cyberInput.placeholder = 'ENTER YOUR NEURAL ADDRESS';
+      }, 2000);
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      cyberInput.style.borderColor = 'rgba(255,0,144,0.8)';
+      cyberInput.style.boxShadow = '0 0 15px rgba(255,0,144,0.3)';
+      showToast('INVALID NEURAL ADDRESS — RETRY');
+      setTimeout(() => {
+        cyberInput.style.borderColor = '';
+        cyberInput.style.boxShadow = '';
+      }, 2000);
+      return;
+    }
+
+    // Success state
+    cyberInput.value = '';
+    cyberInput.style.borderColor = 'rgba(0,245,255,0.8)';
+    cyberInput.style.boxShadow = '0 0 20px rgba(0,245,255,0.3)';
+    cyberInput.placeholder = 'ACCESS GRANTED — WELCOME, RUNNER';
+    initBtn.textContent = 'INITIALIZED ✓';
+    initBtn.style.background = 'rgba(0,245,255,0.15)';
+
+    triggerGlitch();
+    showToast('NEURAL LINK ESTABLISHED — WELCOME TO THE GRID');
+
+    setTimeout(() => {
+      cyberInput.style.borderColor = '';
+      cyberInput.style.boxShadow = '';
+      cyberInput.placeholder = 'ENTER YOUR NEURAL ADDRESS';
+      initBtn.textContent = 'INITIALIZE';
+      initBtn.style.background = '';
+    }, 4000);
+  });
+
+  // Allow Enter key to submit
+  cyberInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') initBtn.click();
+  });
+
+  // Remove error styling on input
+  cyberInput.addEventListener('input', () => {
+    cyberInput.style.borderColor = '';
+    cyberInput.style.boxShadow = '';
+  });
+}
+
+
 // ── GLITCH TRIGGER (NAV BUTTON) ────────────
 function triggerGlitch() {
   document.body.classList.add('glitching');
@@ -230,8 +404,10 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if (target) {
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       // Close mobile menu if open
-      if (window.innerWidth <= 900) {
-        navLinks.style.display = 'none';
+      if (window.innerWidth <= 900 && menuOpen) {
+        menuOpen = false;
+        hamburger.classList.remove('active');
+        navLinks.style.display = '';
       }
     }
   });
@@ -242,27 +418,30 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 const trail = [];
 const TRAIL_LENGTH = 12;
 
-for (let i = 0; i < TRAIL_LENGTH; i++) {
-  const dot = document.createElement('div');
-  dot.style.cssText = `
-    position: fixed; pointer-events: none; z-index: 9997;
-    width: ${4 - i * 0.2}px; height: ${4 - i * 0.2}px;
-    border-radius: 50%;
-    background: rgba(0,245,255,${0.6 - i * 0.05});
-    transform: translate(-50%, -50%);
-    transition: left ${i * 20 + 20}ms linear, top ${i * 20 + 20}ms linear;
-    box-shadow: 0 0 ${6 - i * 0.4}px rgba(0,245,255,0.8);
-  `;
-  document.body.appendChild(dot);
-  trail.push(dot);
-}
+// Only enable on non-touch devices
+if (window.matchMedia('(pointer: fine)').matches) {
+  for (let i = 0; i < TRAIL_LENGTH; i++) {
+    const dot = document.createElement('div');
+    dot.style.cssText = `
+      position: fixed; pointer-events: none; z-index: 9997;
+      width: ${4 - i * 0.2}px; height: ${4 - i * 0.2}px;
+      border-radius: 50%;
+      background: rgba(0,245,255,${0.6 - i * 0.05});
+      transform: translate(-50%, -50%);
+      transition: left ${i * 20 + 20}ms linear, top ${i * 20 + 20}ms linear;
+      box-shadow: 0 0 ${6 - i * 0.4}px rgba(0,245,255,0.8);
+    `;
+    document.body.appendChild(dot);
+    trail.push(dot);
+  }
 
-document.addEventListener('mousemove', (e) => {
-  trail.forEach(dot => {
-    dot.style.left = e.clientX + 'px';
-    dot.style.top  = e.clientY + 'px';
+  document.addEventListener('mousemove', (e) => {
+    trail.forEach(dot => {
+      dot.style.left = e.clientX + 'px';
+      dot.style.top  = e.clientY + 'px';
+    });
   });
-});
+}
 
 
 // ── RANDOM GLITCH (AMBIENT) ────────────────
@@ -277,6 +456,39 @@ function ambientGlitch() {
   }
 }
 setInterval(ambientGlitch, 5000 + Math.random() * 5000);
+
+
+// ── HERO BUTTONS ──────────────────────────
+const exploreBtn = document.querySelector('.btn-primary-cyber');
+const revealBtn  = document.querySelector('.btn-ghost-cyber');
+
+if (exploreBtn) {
+  exploreBtn.addEventListener('click', () => {
+    const products = document.getElementById('products');
+    if (products) products.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
+if (revealBtn) {
+  revealBtn.addEventListener('click', () => {
+    triggerGlitch();
+    showToast('REVEAL TRANSMISSION LOADING... STAND BY');
+  });
+}
+
+
+// ── SECTION REVEAL ON SCROLL ──────────────
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('section-visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('section').forEach(sec => {
+  sectionObserver.observe(sec);
+});
 
 
 // ── CONSOLE EASTER EGG ─────────────────────
