@@ -4,78 +4,81 @@
 
 // ── GRID CANVAS (Hero Background) ──────────
 const canvas = document.getElementById('gridCanvas');
-const ctx = canvas.getContext('2d');
 
-function resizeCanvas() {
-  canvas.width = canvas.offsetWidth;
-  canvas.height = canvas.offsetHeight;
-}
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
+if (canvas) {
+  const ctx = canvas.getContext('2d');
 
-const GRID_SIZE = 50;
-let offsetY = 0;
-let mouseX = -9999, mouseY = -9999;
+  function resizeCanvas() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
 
-canvas.parentElement.addEventListener('mousemove', (e) => {
-  const rect = canvas.getBoundingClientRect();
-  mouseX = e.clientX - rect.left;
-  mouseY = e.clientY - rect.top;
-});
+  const GRID_SIZE = 50;
+  let offsetY = 0;
+  let mouseX = -9999, mouseY = -9999;
 
-function drawGrid() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  canvas.parentElement.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    mouseX = e.clientX - rect.left;
+    mouseY = e.clientY - rect.top;
+  });
 
-  const cols = Math.ceil(canvas.width / GRID_SIZE) + 1;
-  const rows = Math.ceil(canvas.height / GRID_SIZE) + 2;
-  const yOff = offsetY % GRID_SIZE;
+  function drawGrid() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  for (let row = -1; row < rows; row++) {
-    for (let col = 0; col < cols; col++) {
-      const x = col * GRID_SIZE;
-      const y = row * GRID_SIZE - yOff;
+    const cols = Math.ceil(canvas.width / GRID_SIZE) + 1;
+    const rows = Math.ceil(canvas.height / GRID_SIZE) + 2;
+    const yOff = offsetY % GRID_SIZE;
 
-      const dx = x - mouseX;
-      const dy = y - mouseY;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      const glow = Math.max(0, 1 - dist / 200);
+    for (let row = -1; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+        const x = col * GRID_SIZE;
+        const y = row * GRID_SIZE - yOff;
 
-      // Vertical lines
-      ctx.beginPath();
-      ctx.moveTo(x, y);
-      ctx.lineTo(x, y + GRID_SIZE);
-      ctx.strokeStyle = `rgba(0, 245, 255, ${0.04 + glow * 0.15})`;
-      ctx.lineWidth = 1;
-      ctx.stroke();
+        const dx = x - mouseX;
+        const dy = y - mouseY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const glow = Math.max(0, 1 - dist / 200);
 
-      // Horizontal lines
-      ctx.beginPath();
-      ctx.moveTo(x - GRID_SIZE, y);
-      ctx.lineTo(x, y);
-      ctx.strokeStyle = `rgba(0, 245, 255, ${0.04 + glow * 0.15})`;
-      ctx.stroke();
-
-      // Dots at intersections
-      if (glow > 0.3) {
+        // Vertical lines
         ctx.beginPath();
-        ctx.arc(x, y, 2 * glow, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0, 245, 255, ${glow})`;
-        ctx.fill();
+        ctx.moveTo(x, y);
+        ctx.lineTo(x, y + GRID_SIZE);
+        ctx.strokeStyle = `rgba(0, 245, 255, ${0.04 + glow * 0.15})`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        // Horizontal lines
+        ctx.beginPath();
+        ctx.moveTo(x - GRID_SIZE, y);
+        ctx.lineTo(x, y);
+        ctx.strokeStyle = `rgba(0, 245, 255, ${0.04 + glow * 0.15})`;
+        ctx.stroke();
+
+        // Dots at intersections
+        if (glow > 0.3) {
+          ctx.beginPath();
+          ctx.arc(x, y, 2 * glow, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(0, 245, 255, ${glow})`;
+          ctx.fill();
+        }
       }
     }
+
+    // Perspective fade at bottom
+    const fadeGrad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    fadeGrad.addColorStop(0, 'rgba(5,5,8,0)');
+    fadeGrad.addColorStop(1, 'rgba(5,5,8,1)');
+    ctx.fillStyle = fadeGrad;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    offsetY += 0.4;
+    requestAnimationFrame(drawGrid);
   }
-
-  // Perspective fade at bottom
-  const fadeGrad = ctx.createLinearGradient(0, 0, 0, canvas.height);
-  fadeGrad.addColorStop(0, 'rgba(5,5,8,0)');
-  fadeGrad.addColorStop(1, 'rgba(5,5,8,1)');
-  ctx.fillStyle = fadeGrad;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  offsetY += 0.4;
-  requestAnimationFrame(drawGrid);
+  drawGrid();
 }
-drawGrid();
 
 
 // ── NAVBAR SCROLL ──────────────────────────
@@ -465,7 +468,11 @@ const revealBtn  = document.querySelector('.btn-ghost-cyber');
 if (exploreBtn) {
   exploreBtn.addEventListener('click', () => {
     const products = document.getElementById('products');
-    if (products) products.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (products) {
+      products.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      window.location.href = 'projects.html';
+    }
   });
 }
 
@@ -489,6 +496,18 @@ const sectionObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('section').forEach(sec => {
   sectionObserver.observe(sec);
 });
+
+
+// ── ACTIVE NAV LINK ────────────────────────
+(function () {
+  const page = window.location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    const href = a.getAttribute('href').split('/').pop();
+    if (href === page || (page === '' && href === 'index.html')) {
+      a.classList.add('active');
+    }
+  });
+})();
 
 
 // ── CONSOLE EASTER EGG ─────────────────────
