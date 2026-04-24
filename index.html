@@ -2,129 +2,99 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NEON//CORP — Beyond Reality</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hrishikesh S — Home</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
-
-  <!-- Scanline overlay -->
-  <div class="scanlines"></div>
-  <!-- Glitch noise layer -->
-  <div class="noise"></div>
-
-  <!-- ═══ NAVBAR ═══ -->
-  <nav id="navbar">
-    <div class="nav-logo">
-      <span class="logo-glitch" data-text="NEON//CORP">NEON//CORP</span>
-    </div>
-    <ul class="nav-links">
-      <li><a href="index.html">_HOME</a></li>
-      <li><a href="projects.html">_PROJECTS</a></li>
-      <li><a href="courses.html">_COURSES</a></li>
-      <li><a href="cv.html">_CV</a></li>
-      <li><a href="about.html">_ABOUT</a></li>
-      <li><a href="personal.html">_PERSONAL</a></li>
-    </ul>
-  <div class="nav-cta">
-    <button class="btn-cyber" onclick="window.open('resume.pdf')">DOWNLOAD CV</button>
-  </div>
-  <div class="hamburger" id="hamburger">
-    <span></span><span></span><span></span>
-  </div>
-</nav>
-
-  <!-- ═══ HERO ═══ -->
-  <section id="hero">
-    <div class="hero-bg">
-      <canvas id="gridCanvas"></canvas>
-    </div>
-    <div class="hero-content">
-      <div class="hero-eyebrow">
-        <span class="blink">▶</span> NEW ERA INITIALIZED — BUILD 2077.1
-      </div>
-      <h1 class="hero-title">
-        <span class="line1">THE FUTURE</span>
-        <span class="line2 glitch-text" data-text="IS NOW.">IS NOW.</span>
-      </h1>
-      <p class="hero-sub">
-        Engineered for those who refuse the mundane.<br/>
-        Where silicon meets soul, and reality gets rewritten.
-      </p>
-      <div class="hero-actions">
-        <button class="btn-primary-cyber">EXPLORE THE GRID</button>
-        <button class="btn-ghost-cyber">WATCH REVEAL <span class="play-icon">▷</span></button>
-      </div>
-      <div class="hero-stats">
-        <div class="stat"><span class="stat-num" data-target="2077">0</span><span class="stat-label">BUILD YEAR</span></div>
-        <div class="stat-divider">//</div>
-        <div class="stat"><span class="stat-num" data-target="999">0</span><span class="stat-label">TERAFLOPS</span></div>
-        <div class="stat-divider">//</div>
-        <div class="stat"><span class="stat-num" data-target="47">0</span><span class="stat-label">NEURAL CORES</span></div>
+  <nav class="navbar">
+    <div class="container navbar-inner">
+      <a class="nav-brand" href="index.html">Hrishikesh S</a>
+      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
+      <div class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="courses.html">Courses</a>
+        <a href="cv.html">CV</a>
+        <a href="about.html">About</a>
+        <a href="personal.html">Personal</a>
       </div>
     </div>
-    <div class="hero-device">
-      <div class="device-frame">
-        <div class="device-screen">
-          <div class="screen-content">
-            <div class="screen-hud">
-              <div class="hud-line">SYS::ONLINE</div>
-              <div class="hud-line">NET::CONNECTED</div>
-              <div class="hud-bar"><span style="width:87%"></span></div>
-              <div class="hud-line accent">NEURAL::ACTIVE ██████░░ 87%</div>
-            </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="pill">Portfolio Overview</span>
+          <h1 class="hero-title">Building elegant systems with a focus on clarity, craft, and impact.</h1>
+          <p class="hero-sub">I’m Hrishikesh, a systems-focused engineer and researcher. This site highlights my projects, coursework, and the work I’m most proud of — presented with the calm, polished feel you asked for.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="projects.html">Explore projects</a>
+            <a class="btn" href="resume.pdf">Download CV</a>
           </div>
         </div>
-        <div class="device-glow"></div>
+        <div class="hero-card">
+          <h3>Currently focused on</h3>
+          <p class="muted">ML systems, applied research, hardware prototyping, and clean product thinking.</p>
+          <div class="tag-list" style="margin-top:1rem">
+            <span class="tag">Machine Learning</span>
+            <span class="tag">Computer Vision</span>
+            <span class="tag">Systems Design</span>
+            <span class="tag">Quant</span>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="scroll-indicator">
-      <span>SCROLL</span>
-      <div class="scroll-line"></div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ═══ TICKER ═══ -->
-  <div class="ticker-wrap">
-    <div class="ticker">
-      <span>NEURAL INTERFACE v4.0</span>
-      <span>◆</span>
-      <span>QUANTUM ENCRYPTION ENABLED</span>
-      <span>◆</span>
-      <span>CORTEX SYNC: STABLE</span>
-      <span>◆</span>
-      <span>REALITY AUGMENTATION: ACTIVE</span>
-      <span>◆</span>
-      <span>BIOMETRIC LOCK: ENGAGED</span>
-      <span>◆</span>
-      <span>CHROME FIRMWARE 2077.1</span>
-      <span>◆</span>
-      <span>NEURAL INTERFACE v4.0</span>
-      <span>◆</span>
-      <span>QUANTUM ENCRYPTION ENABLED</span>
-      <span>◆</span>
-      <span>CORTEX SYNC: STABLE</span>
-      <span>◆</span>
-      <span>REALITY AUGMENTATION: ACTIVE</span>
-      <span>◆</span>
-    </div>
-  </div>
+    <section class="section">
+      <div class="container split">
+        <div class="surface reveal">
+          <h3>About this space</h3>
+          <p class="muted">A refined, Apple-inspired layout with balanced whitespace, strong typography, and accessible contrast.</p>
+          <ul class="list">
+            <li>Auto light/dark theme with high readability.</li>
+            <li>Consistent rounded corners across all panels.</li>
+            <li>Simple, elegant layout patterns.</li>
+          </ul>
+        </div>
+        <div class="surface reveal">
+          <h3>Quick links</h3>
+          <div class="card-grid">
+            <a class="card" href="projects.html">
+              <h3>Projects</h3>
+              <p class="muted">Research, builds, and experiments.</p>
+            </a>
+            <a class="card" href="courses.html">
+              <h3>Courses</h3>
+              <p class="muted">Academic and research focus areas.</p>
+            </a>
+            <a class="card" href="personal.html">
+              <h3>Personal</h3>
+              <p class="muted">Curated favorites and inspiration.</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-  <!-- ═══ FOOTER ═══ -->
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-logo">NEON//CORP</div>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>Hrishikesh S</strong>
+        <div class="muted">Design · Engineering · Research</div>
+      </div>
       <div class="footer-links">
-        <a href="#">Privacy Protocol</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Support Grid</a>
-        <a href="#">Careers</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="cv.html">CV</a>
       </div>
-      <div class="footer-copy">© 2077 NEON//CORP. All realities reserved.</div>
+      <div class="muted">© <span id="year"></span> Hrishikesh S</div>
     </div>
-    <div class="footer-bar"></div>
   </footer>
 
   <script src="script.js"></script>

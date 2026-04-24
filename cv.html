@@ -2,103 +2,103 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NEON//CORP — CV</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hrishikesh S — CV</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
-
-  <!-- Scanline overlay -->
-  <div class="scanlines"></div>
-  <!-- Glitch noise layer -->
-  <div class="noise"></div>
-
-  <!-- ═══ NAVBAR ═══ -->
-  <nav id="navbar">
-    <div class="nav-logo">
-      <span class="logo-glitch" data-text="NEON//CORP">NEON//CORP</span>
-    </div>
-    <ul class="nav-links">
-      <li><a href="index.html">_HOME</a></li>
-      <li><a href="projects.html">_PROJECTS</a></li>
-      <li><a href="courses.html">_COURSES</a></li>
-      <li><a href="cv.html">_CV</a></li>
-      <li><a href="about.html">_ABOUT</a></li>
-      <li><a href="personal.html">_PERSONAL</a></li>
-    </ul>
-  <div class="nav-cta">
-    <button class="btn-cyber" onclick="window.open('resume.pdf')">DOWNLOAD CV</button>
-  </div>
-  <div class="hamburger" id="hamburger">
-    <span></span><span></span><span></span>
-  </div>
-</nav>
-
-  <!-- ═══ SPECS ═══ -->
-  <section id="specs" style="padding-top: 6rem;">
-    <div class="specs-marquee">
-      <div class="marquee-track">
-        <span>999 TERAFLOPS</span><span>·</span>
-        <span>128GB LIQUID RAM</span><span>·</span>
-        <span>8TB QUANTUM STORAGE</span><span>·</span>
-        <span>47-CORE NEURAL ENGINE</span><span>·</span>
-        <span>32K HOLO DISPLAY</span><span>·</span>
-        <span>48HR PLASMA BATTERY</span><span>·</span>
-        <span>999 TERAFLOPS</span><span>·</span>
-        <span>128GB LIQUID RAM</span><span>·</span>
-        <span>8TB QUANTUM STORAGE</span><span>·</span>
-        <span>47-CORE NEURAL ENGINE</span><span>·</span>
+  <nav class="navbar">
+    <div class="container navbar-inner">
+      <a class="nav-brand" href="index.html">Hrishikesh S</a>
+      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
+      <div class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="courses.html">Courses</a>
+        <a href="cv.html">CV</a>
+        <a href="about.html">About</a>
+        <a href="personal.html">Personal</a>
       </div>
     </div>
-    <div class="specs-grid-wrap">
-      <div class="section-header">
-        <div class="section-tag">// TECH SPECS</div>
-        <h2 class="section-title">RAW <span class="neon-text">POWER</span></h2>
-      </div>
-      <div class="specs-grid">
-        <div class="spec-block">
-          <div class="spec-icon">⚡</div>
-          <div class="spec-value counter" data-target="999">0</div>
-          <div class="spec-unit">TFLOPS</div>
-          <div class="spec-label">Processing Power</div>
-        </div>
-        <div class="spec-block">
-          <div class="spec-icon">◈</div>
-          <div class="spec-value counter" data-target="128">0</div>
-          <div class="spec-unit">GB</div>
-          <div class="spec-label">Liquid Metal RAM</div>
-        </div>
-        <div class="spec-block">
-          <div class="spec-icon">◉</div>
-          <div class="spec-value counter" data-target="48">0</div>
-          <div class="spec-unit">HR</div>
-          <div class="spec-label">Plasma Battery Life</div>
-        </div>
-        <div class="spec-block">
-          <div class="spec-icon">⬡</div>
-          <div class="spec-value counter" data-target="32">0</div>
-          <div class="spec-unit">K</div>
-          <div class="spec-label">Holo Resolution</div>
-        </div>
-      </div>
-    </div>
-  </section>
+  </nav>
 
-  <!-- ═══ FOOTER ═══ -->
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-logo">NEON//CORP</div>
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="pill">Curriculum Vitae</span>
+          <h1 class="hero-title">A concise summary of experience, research, and skills.</h1>
+          <p class="hero-sub">Download the full PDF or browse the highlights below.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="resume.pdf">Download CV</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <h3>Focus areas</h3>
+          <p class="muted">Machine learning, vision, hardware systems, quantitative research.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container split">
+        <div class="surface reveal">
+          <h3>Education</h3>
+          <ul class="list">
+            <li>IIT Bombay — Engineering & Research (2021–2025)</li>
+            <li>Specialization in ML systems and applied research</li>
+          </ul>
+        </div>
+        <div class="surface reveal">
+          <h3>Experience</h3>
+          <ul class="list">
+            <li>Research projects in RAG and computer vision</li>
+            <li>Hardware lab builds and embedded systems</li>
+            <li>Finance community research initiatives</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Skills & tools</h2>
+        </div>
+        <div class="card-grid">
+          <div class="card reveal">
+            <h3>ML & Data</h3>
+            <p class="muted">PyTorch · Scikit-learn · Python · CUDA · Streamlit</p>
+          </div>
+          <div class="card reveal">
+            <h3>Systems</h3>
+            <p class="muted">Embedded Systems · VHDL · RTL · Hardware Prototyping</p>
+          </div>
+          <div class="card reveal">
+            <h3>Product</h3>
+            <p class="muted">Research briefs · Documentation · Design thinking</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>Hrishikesh S</strong>
+        <div class="muted">Design · Engineering · Research</div>
+      </div>
       <div class="footer-links">
-        <a href="#">Privacy Protocol</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Support Grid</a>
-        <a href="#">Careers</a>
+        <a href="projects.html">Projects</a>
+        <a href="courses.html">Courses</a>
+        <a href="about.html">About</a>
       </div>
-      <div class="footer-copy">© 2077 NEON//CORP. All realities reserved.</div>
+      <div class="muted">© <span id="year"></span> Hrishikesh S</div>
     </div>
-    <div class="footer-bar"></div>
   </footer>
 
   <script src="script.js"></script>

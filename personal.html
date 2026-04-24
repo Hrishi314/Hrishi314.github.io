@@ -2,638 +2,122 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NEON//CORP — Personal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hrishikesh S — Personal</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
-  <style>
-    /* ── PERSONAL PAGE ── */
-    #personal {
-      padding-top: 7rem;
-      padding-bottom: 4rem;
-    }
-
-    .personal-hero {
-      text-align: center;
-      margin-bottom: 5rem;
-      position: relative;
-    }
-    .personal-hero::after {
-      content: '';
-      display: block;
-      width: 120px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
-      margin: 2rem auto 0;
-    }
-
-    /* ── CATEGORY SECTION ── */
-    .category-section {
-      max-width: 1300px;
-      margin: 0 auto 5rem;
-    }
-
-    .category-header {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      margin-bottom: 2.5rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--dark-border);
-    }
-    .category-icon {
-      font-size: 2rem;
-      line-height: 1;
-    }
-    .category-label {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.35em;
-      margin-bottom: 0.3rem;
-    }
-    .category-title {
-      font-family: var(--font-display);
-      font-size: clamp(1.4rem, 3vw, 2.2rem);
-      font-weight: 900;
-      letter-spacing: 0.04em;
-      line-height: 1;
-    }
-    .category-count {
-      margin-left: auto;
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      color: var(--text-dim);
-      letter-spacing: 0.2em;
-      white-space: nowrap;
-    }
-
-    /* ── MEDIA GRID ── */
-    .media-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 1.2rem;
-    }
-
-    /* ── MEDIA CARD ── */
-    .media-card {
-      position: relative;
-      background: var(--dark-card);
-      border: 1px solid var(--dark-border);
-      padding: 1.2rem;
-      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
-      overflow: hidden;
-    }
-    .media-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, currentColor, transparent);
-      opacity: 0;
-      transition: opacity 0.4s;
-    }
-    .media-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(0, 245, 255, 0.3);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(0, 245, 255, 0.08);
-    }
-    .media-card:hover::before { opacity: 1; }
-    .media-card:hover .card-img-glow { opacity: 1; }
-
-    /* ── IMAGE FRAME — Apple-style rounded corners ── */
-    .media-img-wrap {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      margin-bottom: 1rem;
-      overflow: hidden;
-      border-radius: 22%;           /* Apple icon-style rounded corner ratio */
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px dashed rgba(255, 255, 255, 0.12);
-    }
-    .media-img-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: inherit;
-      display: block;
-    }
-
-    /* Placeholder shown when no real image */
-    .media-img-placeholder {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-    }
-    .placeholder-icon {
-      font-size: 2rem;
-      opacity: 0.25;
-    }
-    .placeholder-text {
-      font-family: var(--font-mono);
-      font-size: 0.55rem;
-      letter-spacing: 0.2em;
-      color: var(--text-dim);
-      text-transform: uppercase;
-    }
-
-    /* Per-category accent colours */
-    .cat-films  .media-img-wrap { border-color: rgba(0, 245, 255, 0.2); }
-    .cat-films  .media-img-placeholder .placeholder-icon { color: var(--neon-cyan); }
-    .cat-films  .media-card:hover { border-color: rgba(0, 245, 255, 0.4); box-shadow: 0 12px 40px rgba(0,0,0,.5), 0 0 20px rgba(0,245,255,0.08); }
-    .cat-films  .media-card::before { color: var(--neon-cyan); }
-    .cat-films  .media-rank { color: var(--neon-cyan); text-shadow: 0 0 10px var(--neon-cyan); }
-
-    .cat-music  .media-img-wrap { border-color: rgba(255, 0, 144, 0.2); }
-    .cat-music  .media-img-placeholder .placeholder-icon { color: var(--neon-pink); }
-    .cat-music  .media-card:hover { border-color: rgba(255, 0, 144, 0.4); box-shadow: 0 12px 40px rgba(0,0,0,.5), 0 0 20px rgba(255,0,144,0.08); }
-    .cat-music  .media-card::before { color: var(--neon-pink); }
-    .cat-music  .media-rank { color: var(--neon-pink); text-shadow: 0 0 10px var(--neon-pink); }
-
-    .cat-books  .media-img-wrap { border-color: rgba(245, 230, 66, 0.2); }
-    .cat-books  .media-img-placeholder .placeholder-icon { color: var(--neon-yellow); }
-    .cat-books  .media-card:hover { border-color: rgba(245,230,66, 0.4); box-shadow: 0 12px 40px rgba(0,0,0,.5), 0 0 20px rgba(245,230,66,0.08); }
-    .cat-books  .media-card::before { color: var(--neon-yellow); }
-    .cat-books  .media-rank { color: var(--neon-yellow); text-shadow: 0 0 10px var(--neon-yellow); }
-
-    .cat-games  .media-img-wrap { border-color: rgba(178, 0, 255, 0.2); }
-    .cat-games  .media-img-placeholder .placeholder-icon { color: var(--neon-purple); }
-    .cat-games  .media-card:hover { border-color: rgba(178, 0, 255, 0.4); box-shadow: 0 12px 40px rgba(0,0,0,.5), 0 0 20px rgba(178,0,255,0.08); }
-    .cat-games  .media-card::before { color: var(--neon-purple); }
-    .cat-games  .media-rank { color: var(--neon-purple); text-shadow: 0 0 10px var(--neon-purple); }
-
-    /* Card content */
-    .media-rank {
-      font-family: var(--font-display);
-      font-size: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.25em;
-      margin-bottom: 0.4rem;
-    }
-    .media-name {
-      font-family: var(--font-display);
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      color: var(--text-main);
-      margin-bottom: 0.5rem;
-      line-height: 1.3;
-    }
-    .media-meta {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      color: var(--text-dim);
-      letter-spacing: 0.1em;
-      margin-bottom: 0.6rem;
-    }
-    .media-desc {
-      font-size: 0.8rem;
-      color: var(--chrome);
-      font-weight: 300;
-      line-height: 1.6;
-    }
-
-    .card-img-glow {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at top center, rgba(0,245,255,0.04), transparent 70%);
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.4s;
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 1100px) {
-      .media-grid { grid-template-columns: repeat(3, 1fr); }
-    }
-    @media (max-width: 700px) {
-      .media-grid { grid-template-columns: repeat(2, 1fr); }
-      .category-header { flex-wrap: wrap; }
-      .category-count { display: none; }
-    }
-    @media (max-width: 430px) {
-      .media-grid { grid-template-columns: 1fr; }
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
-
-  <!-- Scanline overlay -->
-  <div class="scanlines"></div>
-  <!-- Glitch noise layer -->
-  <div class="noise"></div>
-
-  <!-- ═══ NAVBAR ═══ -->
-  <nav id="navbar">
-    <div class="nav-logo">
-      <span class="logo-glitch" data-text="NEON//CORP">NEON//CORP</span>
-    </div>
-    <ul class="nav-links">
-      <li><a href="index.html">_HOME</a></li>
-      <li><a href="projects.html">_PROJECTS</a></li>
-      <li><a href="courses.html">_COURSES</a></li>
-      <li><a href="cv.html">_CV</a></li>
-      <li><a href="about.html">_ABOUT</a></li>
-      <li><a href="personal.html" class="active">_PERSONAL</a></li>
-    </ul>
-    <div class="nav-cta">
-      <button class="btn-cyber" onclick="window.open('resume.pdf')">DOWNLOAD CV</button>
-    </div>
-    <div class="hamburger" id="hamburger">
-      <span></span><span></span><span></span>
+  <nav class="navbar">
+    <div class="container navbar-inner">
+      <a class="nav-brand" href="index.html">Hrishikesh S</a>
+      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">☰</button>
+      <div class="nav-menu">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="courses.html">Courses</a>
+        <a href="cv.html">CV</a>
+        <a href="about.html">About</a>
+        <a href="personal.html">Personal</a>
+      </div>
     </div>
   </nav>
 
-  <!-- ═══ PERSONAL ═══ -->
-  <section id="personal">
-
-    <!-- Page hero -->
-    <div class="personal-hero">
-      <div class="section-tag">// SIGNAL LOG</div>
-      <h1 class="section-title">MY <span class="neon-text">FAVORITES</span></h1>
-      <p class="section-sub">Curated transmissions from across the grid — films, music, books &amp; games.</p>
-    </div>
-
-    <!-- ══ FILMS ══ -->
-    <div class="category-section cat-films">
-      <div class="category-header">
-        <div class="category-icon">🎬</div>
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
         <div>
-          <div class="category-label" style="color:var(--neon-cyan)">// VISUAL FEED</div>
-          <div class="category-title">FILMS</div>
+          <span class="pill">Personal</span>
+          <h1 class="hero-title">A few things I keep coming back to.</h1>
+          <p class="hero-sub">Curated favorites across film, music, books, and games — the work that inspires my own.</p>
         </div>
-        <div class="category-count">TOP 05 RANKED</div>
+        <div class="hero-card">
+          <h3>Favorites snapshot</h3>
+          <p class="muted">Timeless stories, ambitious systems, and world-building that stays with me.</p>
+        </div>
       </div>
-      <div class="media-grid">
+    </section>
 
-        <div class="media-card">
-          <div class="media-img-wrap">
-            <img src="" alt="Blade Runner 2049 cover" onerror="this.style.display='none'">
-            <div class="media-img-placeholder">
-              <span class="placeholder-icon">🎞</span>
-              <span class="placeholder-text">Add Image</span>
-            </div>
-          </div>
-          <div class="media-rank">#01</div>
-          <div class="media-name">Blade Runner 2049</div>
-          <div class="media-meta">2017 · Denis Villeneuve</div>
-          <div class="media-desc">A breathtaking neo-noir odyssey that asks what it truly means to be human in a world of manufactured souls.</div>
-          <div class="card-img-glow"></div>
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Films</h2>
+          <p class="muted">Visual storytelling at its best.</p>
         </div>
-
-        <div class="media-card">
-          <div class="media-img-wrap">
-            <img src="" alt="2001: A Space Odyssey cover" onerror="this.style.display='none'">
-            <div class="media-img-placeholder">
-              <span class="placeholder-icon">🎞</span>
-              <span class="placeholder-text">Add Image</span>
-            </div>
-          </div>
-          <div class="media-rank">#02</div>
-          <div class="media-name">2001: A Space Odyssey</div>
-          <div class="media-meta">1968 · Stanley Kubrick</div>
-          <div class="media-desc">A transcendent voyage through time and consciousness — cinema as pure philosophy.</div>
-          <div class="card-img-glow"></div>
+        <div class="card-grid">
+          <div class="card reveal"><h3>Blade Runner 2049</h3><p class="card-meta">2017 · Denis Villeneuve</p></div>
+          <div class="card reveal"><h3>2001: A Space Odyssey</h3><p class="card-meta">1968 · Stanley Kubrick</p></div>
+          <div class="card reveal"><h3>Interstellar</h3><p class="card-meta">2014 · Christopher Nolan</p></div>
+          <div class="card reveal"><h3>The Matrix</h3><p class="card-meta">1999 · The Wachowskis</p></div>
+          <div class="card reveal"><h3>Dune</h3><p class="card-meta">2021 · Denis Villeneuve</p></div>
         </div>
-
-        <div class="media-card">
-          <div class="media-img-wrap">
-            <img src="" alt="Interstellar cover" onerror="this.style.display='none'">
-            <div class="media-img-placeholder">
-              <span class="placeholder-icon">🎞</span>
-              <span class="placeholder-text">Add Image</span>
-            </div>
-          </div>
-          <div class="media-rank">#03</div>
-          <div class="media-name">Interstellar</div>
-          <div class="media-meta">2014 · Christopher Nolan</div>
-          <div class="media-desc">Love and gravity bend spacetime in this emotionally charged science-fiction epic.</div>
-          <div class="card-img-glow"></div>
-        </div>
-
-        <div class="media-card">
-          <div class="media-img-wrap">
-            <img src="" alt="The Matrix cover" onerror="this.style.display='none'">
-            <div class="media-img-placeholder">
-              <span class="placeholder-icon">🎞</span>
-              <span class="placeholder-text">Add Image</span>
-            </div>
-          </div>
-          <div class="media-rank">#04</div>
-          <div class="media-name">The Matrix</div>
-          <div class="media-meta">1999 · The Wachowskis</div>
-          <div class="media-desc">Reality is a construct — and the red pill changed everything. The blueprint of cyberpunk cinema.</div>
-          <div class="card-img-glow"></div>
-        </div>
-
-        <div class="media-card">
-          <div class="media-img-wrap">
-            <img src="" alt="Dune cover" onerror="this.style.display='none'">
-            <div class="media-img-placeholder">
-              <span class="placeholder-icon">🎞</span>
-              <span class="placeholder-text">Add Image</span>
-            </div>
-          </div>
-          <div class="media-rank">#05</div>
-          <div class="media-name">Dune</div>
-          <div class="media-meta">2021 · Denis Villeneuve</div>
-          <div class="media-desc">Desert sands, political intrigue, and messianic destiny — world-building elevated to high art.</div>
-          <div class="card-img-glow"></div>
-        </div>
-
       </div>
-    </div><!-- /cat-films -->
+    </section>
 
-    <!-- ══ MUSIC ══ -->
-    <div class="category-section cat-music">
-      <div class="category-header">
-        <div class="category-icon">🎵</div>
-        <div>
-          <div class="category-label" style="color:var(--neon-pink)">// AUDIO STREAM</div>
-          <div class="category-title">MUSIC</div>
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Music</h2>
+          <p class="muted">Albums that shaped my sense of rhythm and mood.</p>
         </div>
-        <div class="category-count">TOP 05 RANKED</div>
+        <div class="card-grid">
+          <div class="card reveal"><h3>OK Computer</h3><p class="card-meta">Radiohead · 1997</p></div>
+          <div class="card reveal"><h3>Random Access Memories</h3><p class="card-meta">Daft Punk · 2013</p></div>
+          <div class="card reveal"><h3>To Pimp a Butterfly</h3><p class="card-meta">Kendrick Lamar · 2015</p></div>
+          <div class="card reveal"><h3>Discovery</h3><p class="card-meta">Daft Punk · 2001</p></div>
+          <div class="card reveal"><h3>In Rainbows</h3><p class="card-meta">Radiohead · 2007</p></div>
+        </div>
       </div>
-      <div class="media-grid">
+    </section>
 
-        <div class="media-card">
-          <div class="media-img-wrap">
-            <img src="" alt="OK Computer cover" onerror="this.style.display='none'">
-            <div class="media-img-placeholder">
-              <span class="placeholder-icon">🎧</span>
-              <span class="placeholder-text">Add Image</span>
-            </div>
-          </div>
-          <div class="media-rank">#01</div>
-          <div class="media-name">OK Computer</div>
-          <div class="media-meta">Radiohead · 1997</div>
-          <div class="media-desc">A prescient meditation on technology and alienation — still sounds like it was recorded in 2077.</div>
-          <div class="card-img-glow"></div>
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Books</h2>
+          <p class="muted">Worlds worth revisiting.</p>
         </div>
-
-        <div class="media-card">
-          <div class="media-img-wrap">
-            <img src="" alt="Random Access Memories cover" onerror="this.style.display='none'">
-            <div class="media-img-placeholder">
-              <span class="placeholder-icon">🎧</span>
-              <span class="placeholder-text">Add Image</span>
-            </div>
-          </div>
-          <div class="media-rank">#02</div>
-          <div class="media-name">Random Access Memories</div>
-          <div class="media-meta">Daft Punk · 2013</div>
-          <div class="media-desc">Human after all — a love letter to analogue soul wrapped in pristine digital production.</div>
-          <div class="card-img-glow"></div>
+        <div class="card-grid">
+          <div class="card reveal"><h3>Neuromancer</h3><p class="card-meta">William Gibson</p></div>
+          <div class="card reveal"><h3>Dune</h3><p class="card-meta">Frank Herbert</p></div>
+          <div class="card reveal"><h3>The Hitchhiker's Guide</h3><p class="card-meta">Douglas Adams</p></div>
+          <div class="card reveal"><h3>Snow Crash</h3><p class="card-meta">Neal Stephenson</p></div>
+          <div class="card reveal"><h3>Foundation</h3><p class="card-meta">Isaac Asimov</p></div>
         </div>
-
-        <div class="media-card">
-          <div class="media-img-wrap">
-            <img src="" alt="To Pimp a Butterfly cover" onerror="this.style.display='none'">
-            <div class="media-img-placeholder">
-              <span class="placeholder-icon">🎧</span>
-              <span class="placeholder-text">Add Image</span>
-            </div>
-          </div>
-          <div class="media-rank">#03</div>
-          <div class="media-name">To Pimp a Butterfly</div>
-          <div class="media-meta">Kendrick Lamar · 2015</div>
-          <div class="media-desc">Jazz, funk, and spoken word fused into one of the most politically fearless albums ever made.</div>
-          <div class="card-img-glow"></div>
-        </div>
-
-        <div class="media-card">
-          <div class="media-img-wrap">
-            <img src="" alt="Discovery cover" onerror="this.style.display='none'">
-            <div class="media-img-placeholder">
-              <span class="placeholder-icon">🎧</span>
-              <span class="placeholder-text">Add Image</span>
-            </div>
-          </div>
-          <div class="media-rank">#04</div>
-          <div class="media-name">Discovery</div>
-          <div class="media-meta">Daft Punk · 2001</div>
-          <div class="media-desc">Pure euphoria distilled into house music — every track a neon-lit dance floor memory.</div>
-          <div class="card-img-glow"></div>
-        </div>
-
-        <div class="media-card">
-          <div class="media-img-wrap">
-            <img src="" alt="In Rainbows cover" onerror="this.style.display='none'">
-            <div class="media-img-placeholder">
-              <span class="placeholder-icon">🎧</span>
-              <span class="placeholder-text">Add Image</span>
-            </div>
-          </div>
-          <div class="media-rank">#05</div>
-          <div class="media-name">In Rainbows</div>
-          <div class="media-meta">Radiohead · 2007</div>
-          <div class="media-desc">Intimate, ghostly, and achingly beautiful — Radiohead at their most human.</div>
-          <div class="card-img-glow"></div>
-        </div>
-
       </div>
-    </div><!-- /cat-music -->
+    </section>
 
-    <!-- ══ BOOKS ══ -->
-    <div class="category-section cat-books">
-      <div class="category-header">
-        <div class="category-icon">📚</div>
-        <div>
-          <div class="category-label" style="color:var(--neon-yellow)">// DATA ARCHIVE</div>
-          <div class="category-title">BOOKS</div>
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Games</h2>
+          <p class="muted">Design, immersion, and narrative craft.</p>
         </div>
-        <div class="category-count">TOP 05 RANKED</div>
+        <div class="card-grid">
+          <div class="card reveal"><h3>Cyberpunk 2077</h3><p class="card-meta">CD Projekt Red</p></div>
+          <div class="card reveal"><h3>The Last of Us</h3><p class="card-meta">Naughty Dog</p></div>
+          <div class="card reveal"><h3>Portal 2</h3><p class="card-meta">Valve</p></div>
+          <div class="card reveal"><h3>Elden Ring</h3><p class="card-meta">FromSoftware</p></div>
+          <div class="card reveal"><h3>Hades</h3><p class="card-meta">Supergiant Games</p></div>
+        </div>
       </div>
-      <div class="media-grid">
+    </section>
+  </main>
 
-        <div class="media-card">
-          <div class="media-img-wrap">
-            <img src="" alt="Neuromancer cover" onerror="this.style.display='none'">
-            <div class="media-img-placeholder">
-              <span class="placeholder-icon">📖</span>
-              <span class="placeholder-text">Add Image</span>
-            </div>
-          </div>
-          <div class="media-rank">#01</div>
-          <div class="media-name">Neuromancer</div>
-          <div class="media-meta">William Gibson · 1984</div>
-          <div class="media-desc">The novel that invented cyberspace — a gritty, luminous fever dream that defined an entire genre.</div>
-          <div class="card-img-glow"></div>
-        </div>
-
-        <div class="media-card">
-          <div class="media-img-wrap">
-            <img src="" alt="Dune cover" onerror="this.style.display='none'">
-            <div class="media-img-placeholder">
-              <span class="placeholder-icon">📖</span>
-              <span class="placeholder-text">Add Image</span>
-            </div>
-          </div>
-          <div class="media-rank">#02</div>
-          <div class="media-name">Dune</div>
-          <div class="media-meta">Frank Herbert · 1965</div>
-          <div class="media-desc">Ecology, religion, and empire collide on a desert world — the most ambitious world ever built in fiction.</div>
-          <div class="card-img-glow"></div>
-        </div>
-
-        <div class="media-card">
-          <div class="media-img-wrap">
-            <img src="" alt="The Hitchhiker's Guide cover" onerror="this.style.display='none'">
-            <div class="media-img-placeholder">
-              <span class="placeholder-icon">📖</span>
-              <span class="placeholder-text">Add Image</span>
-            </div>
-          </div>
-          <div class="media-rank">#03</div>
-          <div class="media-name">The Hitchhiker's Guide to the Galaxy</div>
-          <div class="media-meta">Douglas Adams · 1979</div>
-          <div class="media-desc">The answer is 42. The wittiest, most absurdist tour of the cosmos ever committed to paper.</div>
-          <div class="card-img-glow"></div>
-        </div>
-
-        <div class="media-card">
-          <div class="media-img-wrap">
-            <img src="" alt="Snow Crash cover" onerror="this.style.display='none'">
-            <div class="media-img-placeholder">
-              <span class="placeholder-icon">📖</span>
-              <span class="placeholder-text">Add Image</span>
-            </div>
-          </div>
-          <div class="media-rank">#04</div>
-          <div class="media-name">Snow Crash</div>
-          <div class="media-meta">Neal Stephenson · 1992</div>
-          <div class="media-desc">Hiro Protagonist surfs the Metaverse on a skateboard with a katana — hyperkinetic, prescient genius.</div>
-          <div class="card-img-glow"></div>
-        </div>
-
-        <div class="media-card">
-          <div class="media-img-wrap">
-            <img src="" alt="Foundation cover" onerror="this.style.display='none'">
-            <div class="media-img-placeholder">
-              <span class="placeholder-icon">📖</span>
-              <span class="placeholder-text">Add Image</span>
-            </div>
-          </div>
-          <div class="media-rank">#05</div>
-          <div class="media-name">Foundation</div>
-          <div class="media-meta">Isaac Asimov · 1951</div>
-          <div class="media-desc">Using mathematics to predict civilisational collapse — Asimov's magnum opus about knowledge versus entropy.</div>
-          <div class="card-img-glow"></div>
-        </div>
-
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>Hrishikesh S</strong>
+        <div class="muted">Design · Engineering · Research</div>
       </div>
-    </div><!-- /cat-books -->
-
-    <!-- ══ GAMES ══ -->
-    <div class="category-section cat-games">
-      <div class="category-header">
-        <div class="category-icon">🎮</div>
-        <div>
-          <div class="category-label" style="color:var(--neon-purple)">// SIM DECK</div>
-          <div class="category-title">GAMES</div>
-        </div>
-        <div class="category-count">TOP 05 RANKED</div>
-      </div>
-      <div class="media-grid">
-
-        <div class="media-card">
-          <div class="media-img-wrap">
-            <img src="" alt="Cyberpunk 2077 cover" onerror="this.style.display='none'">
-            <div class="media-img-placeholder">
-              <span class="placeholder-icon">🕹</span>
-              <span class="placeholder-text">Add Image</span>
-            </div>
-          </div>
-          <div class="media-rank">#01</div>
-          <div class="media-name">Cyberpunk 2077</div>
-          <div class="media-meta">CD Projekt Red · 2020</div>
-          <div class="media-desc">Night City is alive with neon excess and corporate dread — a flawed masterpiece of open-world storytelling.</div>
-          <div class="card-img-glow"></div>
-        </div>
-
-        <div class="media-card">
-          <div class="media-img-wrap">
-            <img src="" alt="The Last of Us cover" onerror="this.style.display='none'">
-            <div class="media-img-placeholder">
-              <span class="placeholder-icon">🕹</span>
-              <span class="placeholder-text">Add Image</span>
-            </div>
-          </div>
-          <div class="media-rank">#02</div>
-          <div class="media-name">The Last of Us</div>
-          <div class="media-meta">Naughty Dog · 2013</div>
-          <div class="media-desc">A post-apocalyptic road trip that redefined emotional storytelling in games — brutal and heartbreaking.</div>
-          <div class="card-img-glow"></div>
-        </div>
-
-        <div class="media-card">
-          <div class="media-img-wrap">
-            <img src="" alt="Portal 2 cover" onerror="this.style.display='none'">
-            <div class="media-img-placeholder">
-              <span class="placeholder-icon">🕹</span>
-              <span class="placeholder-text">Add Image</span>
-            </div>
-          </div>
-          <div class="media-rank">#03</div>
-          <div class="media-name">Portal 2</div>
-          <div class="media-meta">Valve · 2011</div>
-          <div class="media-desc">Wit, physics, and GLaDOS — the greatest puzzle game ever made and a comedic tour de force.</div>
-          <div class="card-img-glow"></div>
-        </div>
-
-        <div class="media-card">
-          <div class="media-img-wrap">
-            <img src="" alt="Elden Ring cover" onerror="this.style.display='none'">
-            <div class="media-img-placeholder">
-              <span class="placeholder-icon">🕹</span>
-              <span class="placeholder-text">Add Image</span>
-            </div>
-          </div>
-          <div class="media-rank">#04</div>
-          <div class="media-name">Elden Ring</div>
-          <div class="media-meta">FromSoftware · 2022</div>
-          <div class="media-desc">An open world that treats exploration as discovery — every horizon hides something that will kill or astonish you.</div>
-          <div class="card-img-glow"></div>
-        </div>
-
-        <div class="media-card">
-          <div class="media-img-wrap">
-            <img src="" alt="Hades cover" onerror="this.style.display='none'">
-            <div class="media-img-placeholder">
-              <span class="placeholder-icon">🕹</span>
-              <span class="placeholder-text">Add Image</span>
-            </div>
-          </div>
-          <div class="media-rank">#05</div>
-          <div class="media-name">Hades</div>
-          <div class="media-meta">Supergiant Games · 2020</div>
-          <div class="media-desc">Roguelike perfection — every death advances the story in a game about escaping the Underworld and your own family.</div>
-          <div class="card-img-glow"></div>
-        </div>
-
-      </div>
-    </div><!-- /cat-games -->
-
-  </section>
-
-  <!-- ═══ FOOTER ═══ -->
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-logo">NEON//CORP</div>
       <div class="footer-links">
-        <a href="#">Privacy Protocol</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Support Grid</a>
-        <a href="#">Careers</a>
+        <a href="projects.html">Projects</a>
+        <a href="about.html">About</a>
+        <a href="cv.html">CV</a>
       </div>
-      <div class="footer-copy">© 2077 NEON//CORP. All realities reserved.</div>
+      <div class="muted">© <span id="year"></span> Hrishikesh S</div>
     </div>
-    <div class="footer-bar"></div>
   </footer>
 
   <script src="script.js"></script>
