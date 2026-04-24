@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NEON//CORP — Projects</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Scanline overlay -->
+  <div class="scanlines"></div>
+  <!-- Glitch noise layer -->
+  <div class="noise"></div>
+
+  <!-- ═══ NAVBAR ═══ -->
+  <nav id="navbar">
+    <div class="nav-logo">
+      <span class="logo-glitch" data-text="NEON//CORP">NEON//CORP</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">_HOME</a></li>
+      <li><a href="projects.html">_PROJECTS</a></li>
+      <li><a href="courses.html">_COURSES</a></li>
+      <li><a href="cv.html">_CV</a></li>
+      <li><a href="about.html">_ABOUT</a></li>
+    </ul>
+  <div class="nav-cta">
+    <button class="btn-cyber" onclick="window.open('resume.pdf')">DOWNLOAD CV</button>
+  </div>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+  <!-- ═══ PRODUCTS ═══ -->
+  <section id="products" style="padding-top: 6rem;">
+    <div class="section-header">
+      <div class="section-tag">// PRODUCT LINE</div>
+      <h2 class="section-title">CHOOSE YOUR <span class="neon-text">WEAPON</span></h2>
+      <p class="section-sub">Engineered at the intersection of flesh and machine.</p>
+    </div>
+    <div class="products-grid">
+
+      <div class="product-card featured" data-product="phantom">
+        <div class="card-tag">MOST WANTED</div>
+        <div class="card-icon">◈</div>
+        <h3 class="card-name">PHANTOM X</h3>
+        <p class="card-tagline">Ghost in the machine. You are the signal.</p>
+        <ul class="card-specs">
+          <li><span>CPU</span> 47-Core Neural Engine</li>
+          <li><span>RAM</span> 128GB Liquid Metal</li>
+          <li><span>STORAGE</span> 8TB Quantum Drive</li>
+        </ul>
+        <div class="card-price">
+          <span class="price-from">FROM</span>
+          <span class="price-val">¥2,999</span>
+        </div>
+        <button class="btn-card">GET PHANTOM →</button>
+        <div class="card-glow"></div>
+      </div>
+
+      <div class="product-card" data-product="spectre">
+        <div class="card-icon">⬡</div>
+        <h3 class="card-name">SPECTRE PRO</h3>
+        <p class="card-tagline">For those who bend reality to their will.</p>
+        <ul class="card-specs">
+          <li><span>CPU</span> 24-Core Quantum Chip</li>
+          <li><span>RAM</span> 64GB Chrome DDR6</li>
+          <li><span>STORAGE</span> 4TB Neural SSD</li>
+        </ul>
+        <div class="card-price">
+          <span class="price-from">FROM</span>
+          <span class="price-val">¥1,799</span>
+        </div>
+        <button class="btn-card">GET SPECTRE →</button>
+        <div class="card-glow"></div>
+      </div>
+
+      <div class="product-card" data-product="void">
+        <div class="card-icon">◉</div>
+        <h3 class="card-name">VOID LITE</h3>
+        <p class="card-tagline">Entry point into the neon underground.</p>
+        <ul class="card-specs">
+          <li><span>CPU</span> 12-Core Holo Engine</li>
+          <li><span>RAM</span> 32GB Plasma DDR5</li>
+          <li><span>STORAGE</span> 2TB Ghost Drive</li>
+        </ul>
+        <div class="card-price">
+          <span class="price-from">FROM</span>
+          <span class="price-val">¥999</span>
+        </div>
+        <button class="btn-card">GET VOID →</button>
+        <div class="card-glow"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">NEON//CORP</div>
+      <div class="footer-links">
+        <a href="#">Privacy Protocol</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Support Grid</a>
+        <a href="#">Careers</a>
+      </div>
+      <div class="footer-copy">© 2077 NEON//CORP. All realities reserved.</div>
+    </div>
+    <div class="footer-bar"></div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
